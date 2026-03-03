@@ -1,0 +1,37 @@
+CREATE TABLE MessageTable (
+    id TEXT PRIMARY KEY NOT NULL,
+    senderId TEXT NOT NULL,
+    senderName TEXT NOT NULL,
+    content TEXT NOT NULL,
+    timestamp INTEGER NOT NULL,
+    isSentByMe INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0
+);
+
+CREATE INDEX message_timestamp ON MessageTable(timestamp);
+
+-- Queries
+
+selectAll:
+SELECT * FROM MessageTable ORDER BY timestamp ASC;
+
+selectById:
+SELECT * FROM MessageTable WHERE senderId = ? ORDER BY timestamp ASC;
+
+--selectUnsyncedMessages:
+--SELECT * FROM MessageEntity WHERE syncedWithServer = 0 ORDER BY timestamp ASC;
+
+insertMessage:
+INSERT OR REPLACE INTO MessageTable(id, senderId, senderName, content, timestamp, isSentByMe)
+VALUES (?, ?, ?, ?, ?, ?);
+
+deleteMessage:
+DELETE FROM MessageTable WHERE id = ?;
+
+deleteAllMessages:
+DELETE FROM MessageTable;
+
+--updateSyncStatus:
+--UPDATE MessageEntity SET syncedWithServer = ? WHERE id = ?;
+
+countMessages:
+SELECT COUNT(*) FROM MessageTable;
