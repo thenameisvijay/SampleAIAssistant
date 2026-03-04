@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.KoinAppDeclaration
@@ -71,8 +72,11 @@ val appModules = listOf(
     networkModule,
     repositoryModule,
     useCaseModule,
-    viewModelModule
+    viewModelModule,
+    targetModule
 )
+
+expect val targetModule: Module
 
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {

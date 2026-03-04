@@ -1,6 +1,8 @@
 package com.vj.sampleaiassistant.data.database
 
 import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import com.vj.AIChatDatabase
 import com.vj.sampleaiassistant.data.local.database.DatabaseDriverFactory
 
 /**
@@ -8,7 +10,7 @@ import com.vj.sampleaiassistant.data.local.database.DatabaseDriverFactory
  * https://github.com/thenameisvijay
  */
 class IOSDatabaseDriverFactory: DatabaseDriverFactory {
-    override fun createDriver(): SqlDriver {
-        TODO("Not yet implemented")
-    }
+    override fun createDriver(): SqlDriver = NativeSqliteDriver(
+            AIChatDatabase.Schema, "chat.db"
+        )
 }
