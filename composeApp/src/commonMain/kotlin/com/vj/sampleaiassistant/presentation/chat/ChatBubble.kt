@@ -1,14 +1,13 @@
 package com.vj.sampleaiassistant.presentation.chat
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import com.vj.sampleaiassistant.data.local.database.MessageEntity
 
 /**
  * Created by Vijay on 02/03/2026.
  * https://github.com/thenameisvijay
  */
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun ChatBubbleSentPreview() {
     ChatBubble(
@@ -23,7 +22,7 @@ fun ChatBubbleSentPreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun ChatBubbleReceivedPreview() {
     ChatBubble(

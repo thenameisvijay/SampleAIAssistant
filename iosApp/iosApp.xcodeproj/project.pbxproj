@@ -10,6 +10,7 @@
 		8455EDA5684B047CF5FD5239 /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455EDA1684B047CF5FD5235 /* iOSApp.swift */; };
 		8455EDA6684B047CF5FD523A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455EDA2684B047CF5FD5236 /* ContentView.swift */; };
 		8455EDA7684B047CF5FD523B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8455EDA4684B047CF5FD5238 /* Assets.xcassets */; };
+		B18F1AB82F59E5DE00131F36 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B18F1AB72F59E5DE00131F36 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		8455EDA2684B047CF5FD5236 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8455EDA3684B047CF5FD5237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8455EDA4684B047CF5FD5238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B18F1AB72F59E5DE00131F36 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C86657DC0F97218C807055E9 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67FB836E71C6800A3D28FC2 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -26,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B18F1AB82F59E5DE00131F36 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +54,14 @@
 			path = iosApp;
 			sourceTree = "<group>";
 		};
+		B18F1AB62F59E5DE00131F36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B18F1AB72F59E5DE00131F36 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E67FB835E71C6800A3D28FC1 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +76,7 @@
 				E67FB835E71C6800A3D28FC1 /* Configuration */,
 				8455EDA0684B047CF5FD5234 /* iosApp */,
 				5CDBA6E0D04028A0BE58991A /* Products */,
+				B18F1AB62F59E5DE00131F36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,7 +221,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

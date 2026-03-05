@@ -63,7 +63,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
-    engine: SpeechToTextEngine
+    engine: SpeechToTextEngine? = null // Made nullable to support Previews
 ) {
     val viewModel = koinViewModel<ChatViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -99,7 +99,7 @@ fun ChatScreen(
     }
 
     DisposableEffect(engine) {
-        onDispose { engine.release() }
+        onDispose { engine?.release() }
     }
 
     Scaffold(
@@ -121,16 +121,17 @@ fun ChatScreen(
                     isListening = speechState is SpeechState.Listening,
                     onToggleListening = {
                         scope.launch {
+                            val currentEngine = engine ?: return@launch
                             if (!hasPermission) {
-                                hasPermission = engine.requestPermission()
+                                hasPermission = currentEngine.requestPermission()
                             }
                             if (hasPermission) {
                                 if (speechState is SpeechState.Listening) {
-                                    engine.stopListening()
+                                    currentEngine.stopListening()
                                     speechState = SpeechState.Idle
                                 } else {
                                     speechState = SpeechState.Listening
-                                    engine.startListening { newState ->
+                                    currentEngine.startListening { newState ->
                                         speechState = newState
                                     }
                                 }

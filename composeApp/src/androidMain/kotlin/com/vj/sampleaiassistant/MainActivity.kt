@@ -30,6 +30,6 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    lateinit var engine: SpeechToTextEngine
-    App(engine)
+    // Pass null for preview to avoid NullPointerException/UninitializedPropertyAccessException
+    App(null)
 }

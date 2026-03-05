@@ -23,9 +23,9 @@ import kotlin.coroutines.resume
 actual class SpeechToTextEngine {
 
     private val speechRecognizer = SFSpeechRecognizer(locale = NSLocale.currentLocale)
-    private val audioEngine      = AVAudioEngine()
-    private var request:  SFSpeechAudioBufferRecognitionRequest? = null
-    private var task:     SFSpeechRecognitionTask?               = null
+    private val audioEngine = AVAudioEngine()
+    private var request: SFSpeechAudioBufferRecognitionRequest? = null
+    private var task: SFSpeechRecognitionTask? = null
 
     actual suspend fun requestPermission(): Boolean {
         val speechOk = suspendCancellableCoroutine<Boolean> { cont ->
@@ -47,10 +47,12 @@ actual class SpeechToTextEngine {
         stopListening()
 
         val session = AVAudioSession.sharedInstance()
-        session.setCategory(AVAudioSessionCategoryRecord,
-            mode    = AVAudioSessionModeMeasurement,
+        session.setCategory(
+            AVAudioSessionCategoryRecord,
+            mode = AVAudioSessionModeMeasurement,
             options = AVAudioSessionCategoryOptionDuckOthers,
-            error   = null)
+            error = null
+        )
         session.setActive(true, error = null)
 
         request = SFSpeechAudioBufferRecognitionRequest().also {
@@ -58,7 +60,7 @@ actual class SpeechToTextEngine {
         }
 
         val inputNode = audioEngine.inputNode
-        val format    = inputNode.outputFormatForBus(0u)
+        val format = inputNode.outputFormatForBus(0u)
         inputNode.installTapOnBus(0u, bufferSize = 1024u, format = format) { buffer, _ ->
             request?.appendAudioPCMBuffer(buffer!!)
         }
@@ -67,7 +69,7 @@ actual class SpeechToTextEngine {
         audioEngine.startAndReturnError(null)
 
         task = speechRecognizer?.recognitionTaskWithRequest(
-            request  = request!!,
+            request = request!!,
             delegate = object : NSObject(), SFSpeechRecognitionTaskDelegateProtocol {
 
                 override fun speechRecognitionTask(
@@ -110,7 +112,10 @@ actual class SpeechToTextEngine {
         request = null
         task?.cancel()
         task = null
-        try { AVAudioSession.sharedInstance().setActive(false, error = null) } catch (_: Exception) {}
+        try {
+            AVAudioSession.sharedInstance().setActive(false, error = null)
+        } catch (_: Exception) {
+        }
     }
 
     actual fun release() = stopListening()
