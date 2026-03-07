@@ -11,6 +11,6 @@ import com.vj.sampleaiassistant.data.remote.AIChatApiService
 class RemoteMessageDataSource(private val api: AIChatApiService
 ) {
     suspend fun sendMessage(message: String): MessageResponseModel {
-        return api.sendMessage(MessageRequestModel("321", "Vijay", prompt = message))
+        return api.sendMessage(MessageRequestModel(prompt = message))
     }
 }

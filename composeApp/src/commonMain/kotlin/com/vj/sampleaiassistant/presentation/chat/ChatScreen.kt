@@ -148,100 +148,24 @@ fun ChatScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            LazyColumn(
-                state = listState,
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 100.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(uiState.messages) { message ->
-                    println("Message: ${message.content}")
-                    ChatBubble(message)
+            if (uiState.messages.isEmpty() && !uiState.isLoading) {
+                WelcomeMessage()
+            } else {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 100.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(uiState.messages) { message ->
+                        ChatBubble(message)
+                    }
                 }
             }
 
             if (uiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-        }
-    }
-}
-
-@Composable
-fun ChatBubble(message: MessageEntity) {
-    val alignment = if (message.isSentByMe) Alignment.CenterEnd else Alignment.CenterStart
-    val containerColor = if (message.isSentByMe)
-        MaterialTheme.colorScheme.primary
-    else
-        MaterialTheme.colorScheme.secondaryContainer
-
-    val contentColor = if (message.isSentByMe)
-        MaterialTheme.colorScheme.onPrimary
-    else
-        MaterialTheme.colorScheme.onSecondaryContainer
-
-    Box(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), contentAlignment = alignment) {
-        Surface(
-            color = containerColor,
-            contentColor = contentColor,
-            shape = RoundedCornerShape(
-                topStart = 16.dp,
-                topEnd = 16.dp,
-                bottomStart = if (message.isSentByMe) 16.dp else 4.dp,
-                bottomEnd = if (message.isSentByMe) 4.dp else 16.dp
-            ),
-            modifier = Modifier.widthIn(max = 280.dp)
-        ) {
-            Text(
-                text = message.content,
-                modifier = Modifier.padding(12.dp),
-                fontSize = 16.sp
-            )
-        }
-    }
-}
-
-@Composable
-fun MicButton(
-    isListening: Boolean,
-    onToggleListening: () -> Unit
-) {
-    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-    val pulseScale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.25f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(700, easing = EaseInOut),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "scale"
-    )
-
-    Box(contentAlignment = Alignment.Center) {
-        if (isListening) {
-            Box(
-                modifier = Modifier
-                    .size(80.dp)
-                    .scale(pulseScale)
-                    .background(
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
-                        shape = CircleShape
-                    )
-            )
-        }
-
-        FloatingActionButton(
-            onClick = onToggleListening,
-            shape = CircleShape,
-            containerColor = if (isListening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-            contentColor = Color.White,
-            modifier = Modifier.size(72.dp)
-        ) {
-            Icon(
-                imageVector = if (isListening) Icons.Default.Stop else Icons.Default.Mic,
-                contentDescription = if (isListening) "Stop" else "Mic",
-                modifier = Modifier.size(32.dp)
-            )
         }
     }
 }

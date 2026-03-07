@@ -9,10 +9,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class MessageRequestModel(
-    @SerialName("senderId")
-    val senderId: String?,
-    @SerialName("senderName")
-    val senderName: String?,
     @SerialName("prompt")
     val prompt: String
 )

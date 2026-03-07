@@ -14,7 +14,7 @@ import io.ktor.http.contentType
  * https://github.com/thenameisvijay
  */
 
-const val BASE_URL = ""
+const val BASE_URL = "" // Paste the IP address from Tailscale + port which you have given (eg:8000)
 class AIChatApiService(private val client: HttpClient) {
 
     suspend fun sendMessage(request: MessageRequestModel): MessageResponseModel {
